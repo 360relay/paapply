@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Form</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --bg: #e8e0d5;
+        --bg-soft: #f3ede4;
+        --primary: #1e3d34;
+        --primary-dark: #162e27;
+        --accent: #c9b79c;
+        --text-dark: #1e3d34;
+        --text-body: #3d3a33;
+        --text-light: #6b6459;
+        --white: #ffffff;
+        --radius: 10px;
+        --shadow: 0 6px 20px -6px rgba(30, 61, 52, 0.15);
+        --t: all 0.3s ease;
+        --error: #b13b2e;
+      }
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-body);
+        background: var(--bg);
+        overflow-x: hidden;
+        padding-top: 38px;
+      }
+
+      /* ==== MINIMAL HEADER with BACK ==== */
+      .countdown-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: var(--bg-soft);
+        color: var(--primary);
+        padding: 8px 12px;
+        z-index: 9999;
+        box-shadow: 0 2px 8px rgba(30, 61, 52, 0.08);
+        font-size: 12px;
+        border-bottom: 1px solid rgba(30, 61, 52, 0.08);
+      }
+      .banner-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--primary);
+        color: #f3ede4;
+        border: none;
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--t);
+        font-family: inherit;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+      }
+      .back-btn:hover {
+        background: var(--primary-dark);
+        transform: translateX(-2px);
+        box-shadow: 0 4px 10px -3px rgba(30, 61, 52, 0.4);
+      }
+      .back-btn .arrow {
+        font-size: 13px;
+        line-height: 1;
+        transition: transform 0.2s ease;
+      }
+      .back-btn:hover .arrow {
+        transform: translateX(-2px);
+      }
+      .banner-middle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex: 1;
+      }
+      .urgent-tag {
+        background: var(--primary);
+        color: #fff;
+        padding: 2px 9px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 10px;
+        white-space: nowrap;
+        letter-spacing: 0.5px;
+      }
+      .banner-text {
+        font-size: 12px;
+        text-align: center;
+        color: var(--text-body);
+      }
+      .banner-text strong {
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .countdown-inline {
+        display: flex;
+        gap: 5px;
+        background: rgba(30, 61, 52, 0.06);
+        padding: 2px 8px;
+        border-radius: 12px;
+      }
+      .time-unit {
+        font-weight: 700;
+        font-size: 11px;
+        color: var(--text-body);
+      }
+      .time-unit span {
+        color: var(--primary);
+      }
+      .breaking-inline {
+        font-size: 11px;
+        white-space: nowrap;
+        color: var(--text-light);
+      }
+      .breaking-inline strong {
+        color: var(--primary);
+      }
+      .banner-right-spacer {
+        width: 80px;
+      }
+
+      .contact-spacer {
+        height: 24px;
+        width: 100%;
+      }
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+
+      /* ==== FORM ==== */
+      .apply-form {
+        background: var(--bg-soft);
+        border-radius: var(--radius);
+        padding: 2rem 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(30, 61, 52, 0.06);
+        margin: 1rem auto 2rem;
+      }
+      .form-header {
+        text-align: center;
+        margin-bottom: 1.6rem;
+      }
+      .form-header h3 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.7rem;
+        margin-bottom: 0.4rem;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: -0.2px;
+      }
+      .form-header p {
+        color: var(--text-light);
+        font-size: 0.9rem;
+      }
+
+      .form-group.floating {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .form-group.floating input,
+      .form-group.floating textarea,
+      .form-group.floating select {
+        width: 100%;
+        padding: 1rem 0.8rem 0.5rem;
+        border: 2px solid rgba(30, 61, 52, 0.15);
+        border-radius: var(--radius);
+        font-size: 1rem;
+        background: #fff;
+        color: var(--text-body);
+        transition: var(--t);
+        height: 52px;
+        font-family: inherit;
+      }
+      .form-group.floating textarea {
+        height: auto;
+        min-height: 110px;
+        padding: 1.4rem 0.8rem 0.7rem;
+        resize: vertical;
+        line-height: 1.5;
+      }
+      .form-group.floating select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231e3d34' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 14px;
+        padding-right: 2.5rem;
+        cursor: pointer;
+      }
+      .form-group.floating label {
+        position: absolute;
+        top: 50%;
+        left: 0.8rem;
+        transform: translateY(-50%);
+        color: var(--text-light);
+        font-size: 1rem;
+        pointer-events: none;
+        transition: var(--t);
+        background: #fff;
+        padding: 0 0.3rem;
+      }
+      .form-group.floating textarea + label {
+        top: 1.3rem;
+        transform: none;
+      }
+      .form-group.floating select + label {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .form-group.floating input:focus,
+      .form-group.floating input:not(:placeholder-shown),
+      .form-group.floating textarea:focus,
+      .form-group.floating textarea:not(:placeholder-shown),
+      .form-group.floating select:focus,
+      .form-group.floating select:valid {
+        border-color: var(--primary);
+        outline: none;
+      }
+      .form-group.floating input:focus + label,
+      .form-group.floating input:not(:placeholder-shown) + label,
+      .form-group.floating textarea:focus + label,
+      .form-group.floating textarea:not(:placeholder-shown) + label,
+      .form-group.floating select:focus + label,
+      .form-group.floating select:valid + label {
+        top: 0;
+        font-size: 0.8rem;
+        color: var(--primary);
+        font-weight: 600;
+        transform: translateY(0);
+      }
+      .form-group.floating input.error,
+      .form-group.floating textarea.error,
+      .form-group.floating select.error {
+        border-color: var(--error) !important;
+      }
+      .form-group.floating input.error + label,
+      .form-group.floating textarea.error + label,
+      .form-group.floating select.error + label {
+        color: var(--error) !important;
+      }
+      .field-error {
+        color: var(--error);
+        font-size: 12px;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
+        animation: errIn 0.25s ease;
+      }
+      .field-error::before {
+        content: "⚠";
+        font-size: 12px;
+      }
+      @keyframes errIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0;
+      }
+      .form-row .form-group {
+        margin-bottom: 1.2rem;
+      }
+      @media (min-width: 640px) {
+        .form-row {
+          flex-direction: row;
+          gap: 1rem;
+        }
+        .form-row .form-group {
+          flex: 1;
+          margin-bottom: 1.2rem;
+        }
+      }
+      .field-helper {
+        display: flex;
+        gap: 6px;
+        margin-top: 2px;
+        font-size: 11px;
+        color: var(--text-light);
+        line-height: 1.2;
+      }
+      .required {
+        color: var(--error);
+      }
+
+      .submit-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.6rem;
+      }
+      .submit-btn {
+        background: var(--primary);
+        color: #f3ede4;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: var(--t);
+        min-width: 220px;
+        height: 52px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        letter-spacing: 0.3px;
+        font-family: inherit;
+      }
+      .submit-btn:hover:not(:disabled) {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px -8px rgba(30, 61, 52, 0.45);
+      }
+      .submit-btn:disabled {
+        background: var(--text-light);
+        cursor: not-allowed;
+        transform: none;
+      }
+      .btn-loading .spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid transparent;
+        border-top: 2px solid #f3ede4;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      footer {
+        background: var(--primary);
+        color: #d8cfc1;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        font-size: 0.85rem;
+      }
+
+      /* ==== SUCCESS ==== */
+      .form-success-message {
+        text-align: center;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(30, 61, 52, 0.12);
+        margin: 1rem 0;
+        animation: fadeInUp 0.6s ease-out;
+        border: 1px solid rgba(30, 61, 52, 0.06);
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .success-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary);
+        color: #f3ede4;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 auto 1.5rem;
+        animation: bounceIn 0.6s ease-out;
+      }
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .form-success-message h3 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--primary);
+        font-size: 1.9rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+      .form-success-message p {
+        color: var(--text-light);
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+      .next-steps {
+        background: var(--bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        text-align: left;
+      }
+      .next-steps h3 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .next-steps ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .next-steps li {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+        align-items: flex-start;
+      }
+      .step-number {
+        background: var(--primary);
+        color: #f3ede4;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+      .next-steps li div:last-child {
+        color: var(--text-body);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .next-steps strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+      .share-section {
+        background: rgba(201, 183, 156, 0.18);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        border: 1px solid rgba(30, 61, 52, 0.08);
+      }
+      .share-section p {
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .share-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .share-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 180px;
+        font-family: inherit;
+      }
+      .whatsapp-btn {
+        background: #25d366;
+        color: #fff;
+      }
+      .whatsapp-btn:hover {
+        background: #128c7e;
+        transform: translateY(-2px);
+      }
+      .copy-link-btn {
+        background: var(--primary);
+        color: #f3ede4;
+      }
+      .copy-link-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+      .share-icon {
+        font-size: 1.2rem;
+      }
+      .share-note {
+        color: var(--text-light);
+        font-style: italic;
+      }
+      .copy-feedback {
+        margin-top: 0.5rem;
+        color: var(--primary);
+        font-weight: 600;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .copy-feedback.show {
+        opacity: 1;
+      }
+
+      @media (max-width: 600px) {
+        .banner-content {
+          gap: 6px;
+          padding: 2px 0;
+        }
+        .banner-middle {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+        }
+        .back-btn {
+          font-size: 11px;
+          padding: 4px 12px;
+        }
+        .banner-right-spacer {
+          display: none;
+        }
+        .urgent-tag {
+          font-size: 9px;
+          padding: 2px 7px;
+        }
+        .banner-text {
+          font-size: 10px;
+        }
+        .banner-text strong {
+          font-size: 11px;
+        }
+        .time-unit {
+          font-size: 10px;
+        }
+        .breaking-inline {
+          display: none;
+        }
+        .container {
+          padding: 1rem 0.8rem;
+        }
+        .apply-form {
+          padding: 1.25rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==== MINIMAL HEADER with BACK ==== -->
+    <div class="countdown-banner">
+      <div class="banner-content">
+        <button type="button" class="back-btn" onclick="goBack()">
+          <span class="arrow">←</span> Back
+        </button>
+        <div class="banner-middle">
+          <span class="urgent-tag">URGENT</span>
+          <span class="banner-text"
+            >Only <strong id="positions">15</strong> left ·
+            <span id="month-year">Oct 31</span></span
+          >
+          <div class="countdown-inline">
+            <span class="time-unit"><span id="days">2</span>d</span>
+            <span class="time-unit"><span id="hours">12</span>h</span>
+            <span class="time-unit"><span id="minutes">25</span>m</span>
+            <span class="time-unit"><span id="seconds">11</span>s</span>
+          </div>
+          <span class="breaking-inline"
+            >⚡ <strong>50 New</strong> Positions!</span
+          >
+        </div>
+        <span class="banner-right-spacer" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="contact-spacer"></div>
+
+    <div class="container">
+      <div class="apply-form">
+        <div class="form-header">
+          <h3>Apply Now</h3>
+          <p>Fill out the form below to start your application</p>
+        </div>
+
+        <form id="applicationForm" novalidate>
+          <div class="form-group floating">
+            <input type="text" id="fullName" name="fullName" placeholder=" " />
+            <label for="fullName"
+              >Full Name <span class="required">*</span></label
+            >
+            <div class="field-helper">
+              <span>ℹ️</span><span>Enter your first and last name</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group floating">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder=" "
+                autocomplete="email"
+              />
+              <label for="email"
+                >Email Address <span class="required">*</span></label
+              >
+            </div>
+            <div class="form-group floating">
+              <input type="tel" id="phone" name="phone" placeholder=" " />
+              <label for="phone"
+                >Phone Number <span class="required">*</span></label
+              >
+            </div>
+          </div>
+
+          <div class="form-group floating">
+            <input type="text" id="address" name="address" placeholder=" " />
+            <label for="address">Address <span class="required">*</span></label>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group floating">
+              <input type="text" id="city" name="city" placeholder=" " />
+              <label for="city">City <span class="required">*</span></label>
+            </div>
+            <div class="form-group floating">
+              <input type="text" id="state" name="state" placeholder=" " />
+              <label for="state">State <span class="required">*</span></label>
+            </div>
+            <div class="form-group floating">
+              <input type="text" id="zip" name="zip" placeholder=" " />
+              <label for="zip">Zip Code <span class="required">*</span></label>
+            </div>
+          </div>
+
+          <div class="form-group floating">
+            <textarea
+              id="experience"
+              name="experience"
+              placeholder=" "
+            ></textarea>
+            <label for="experience">Previous Experience (optional)</label>
+          </div>
+
+          <div class="form-group floating">
+            <select id="start" name="start">
+              <option value="" selected disabled></option>
+              <option value="immediately">Immediately</option>
+              <option value="1week">Within 1 week</option>
+              <option value="2weeks">Within 2 weeks</option>
+              <option value="other">Other (please explain in comments)</option>
+            </select>
+            <label for="start"
+              >When can you start? <span class="required">*</span></label
+            >
+          </div>
+
+          <div class="form-group floating">
+            <textarea
+              id="references"
+              name="references"
+              placeholder=" "
+            ></textarea>
+            <label for="references"
+              >Optional: Professional References (Name, Relationship, Contact
+              Info)</label
+            >
+          </div>
+
+          <div class="form-group floating">
+            <textarea id="comments" name="comments" placeholder=" "></textarea>
+            <label for="comments">Optional: Additional Comments</label>
+          </div>
+
+          <div class="submit-wrap">
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span class="btn-text">Submit Application</span>
+              <span class="btn-loading" style="display: none"
+                ><span class="spinner"></span>Submitting...</span
+              >
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer><p>© 2026 Art Supplies Assistant. All rights reserved.</p></footer>
+
+    <script>
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbzGCxVjqa9HdelP-WLd2BTux0nKlJD0KUL2CqYvF_4cDdTbHfx3otpMn0kB2my6bRiiCw/exec";
+      const SHARE_URL = "https://www.shoppaymysteryshop.com/";
+
+      /* ==== BACK — pure browser history, no fallback URL ==== */
+      function goBack() {
+        window.history.back();
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("applicationForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        initFloatingLabels();
+        initCountdown();
+        attachLiveValidation();
+
+        function attachLiveValidation() {
+          [
+            "fullName",
+            "address",
+            "city",
+            "state",
+            "zip",
+            "email",
+            "phone",
+          ].forEach(function (id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.addEventListener("input", function () {
+              clearFieldError(this);
+            });
+            el.addEventListener("blur", function () {
+              validateField(this);
+            });
+          });
+        }
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const fields = [
+            "fullName",
+            "address",
+            "city",
+            "state",
+            "zip",
+            "email",
+            "phone",
+            "start",
+          ];
+          let firstInvalid = null;
+          fields.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (!validateField(el) && !firstInvalid) firstInvalid = el;
+          });
+
+          if (firstInvalid) {
+            firstInvalid.focus({ preventScroll: true });
+            firstInvalid.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+            return;
+          }
+
+          const btnText = submitBtn.querySelector(".btn-text");
+          const btnLoading = submitBtn.querySelector(".btn-loading");
+          submitBtn.disabled = true;
+          btnText.style.display = "none";
+          btnLoading.style.display = "inline-flex";
+
+          try {
+            const fd = new FormData(form);
+            const data = {
+              fullName: (fd.get("fullName") || "").trim(),
+              address: (fd.get("address") || "").trim(),
+              city: (fd.get("city") || "").trim(),
+              state: (fd.get("state") || "").trim(),
+              zip: (fd.get("zip") || "").trim(),
+              email: (fd.get("email") || "").trim(),
+              phone: (fd.get("phone") || "").trim(),
+              experience: (fd.get("experience") || "").trim(),
+              start: (fd.get("start") || "").trim(),
+              references: (fd.get("references") || "").trim(),
+              comments: (fd.get("comments") || "").trim(),
+              formattedAddress: buildFormattedAddress(fd),
+              timestamp: new Date().toISOString(),
+              source: "Personal Assistant Application",
+            };
+
+            console.log("Sending to Google Sheets:", data);
+
+            await fetch(GOOGLE_SCRIPT_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify(data),
+            });
+
+            showSuccess(form);
+          } catch (err) {
+            console.error("Submit error:", err);
+            alert(
+              "There was an error submitting your application. Please try again.",
+            );
+            submitBtn.disabled = false;
+            btnText.style.display = "inline-flex";
+            btnLoading.style.display = "none";
+          }
+        });
+
+        function buildFormattedAddress(fd) {
+          const g = (k) => (fd.get(k) || "").trim();
+          let out = "";
+          if (g("fullName")) out += g("fullName") + "\n";
+          if (g("address")) out += g("address") + "\n";
+          const loc = [g("city"), g("state"), g("zip")]
+            .filter(Boolean)
+            .join(", ");
+          if (loc) out += loc + "\n";
+          if (g("email")) out += g("email") + "\n";
+          if (g("phone")) out += g("phone") + "\n";
+          out += "==============";
+          return out;
+        }
+
+        function validateField(el) {
+          if (!el) return true;
+          const id = el.id;
+          const value = (el.value || "").trim();
+          let message = "";
+
+          if (!value) {
+            const labels = {
+              fullName: "Full Name",
+              address: "Address",
+              city: "City",
+              state: "State",
+              zip: "Zip Code",
+              email: "Email Address",
+              phone: "Phone Number",
+              start: "Start date",
+            };
+            message = labels[id] + " is required";
+          } else if (id === "fullName") {
+            const parts = value.split(/\s+/).filter(Boolean);
+            if (parts.length < 2)
+              message = "Please enter your first and last name";
+            else if (parts.some((p) => p.length < 2))
+              message = "Name must be at least 2 characters";
+            else if (!/^[A-Za-z][A-Za-z\s.'-]*$/.test(value))
+              message = "Name can only contain letters, spaces, ' - .";
+          } else if (id === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+            if (!emailRegex.test(value))
+              message = "Please enter a valid email address";
+          } else if (id === "phone") {
+            const digits = value.replace(/\D/g, "");
+            if (digits.length < 7)
+              message = "Please enter a valid phone number";
+          } else if (id === "zip") {
+            if (value.length < 3) message = "Please enter a valid zip code";
+          }
+
+          if (message) {
+            showFieldError(el, message);
+            return false;
+          }
+          clearFieldError(el);
+          return true;
+        }
+
+        function showFieldError(el, message) {
+          el.classList.add("error");
+          const parent = el.parentElement;
+          let err = parent.querySelector(".field-error");
+          if (!err) {
+            err = document.createElement("div");
+            err.className = "field-error";
+            parent.appendChild(err);
+          }
+          err.textContent = message;
+        }
+
+        function clearFieldError(el) {
+          el.classList.remove("error");
+          const parent = el.parentElement;
+          const err = parent.querySelector(".field-error");
+          if (err) err.remove();
+        }
+
+        function initFloatingLabels() {
+          document
+            .querySelectorAll(
+              ".form-group.floating input, .form-group.floating textarea, .form-group.floating select",
+            )
+            .forEach(function (input) {
+              const update = () =>
+                input.parentElement.classList.toggle("filled", !!input.value);
+              update();
+              input.addEventListener("focus", () =>
+                input.parentElement.classList.add("focused"),
+              );
+              input.addEventListener("blur", () => {
+                input.parentElement.classList.remove("focused");
+                update();
+              });
+              input.addEventListener("change", update);
+              input.addEventListener("input", update);
+            });
+        }
+
+        function showSuccess(formEl) {
+          formEl.style.display = "none";
+          const wrap = formEl.parentElement;
+          const div = document.createElement("div");
+          div.className = "form-success-message";
+          div.innerHTML = `
+      <div class="success-icon">✓</div>
+      <h3>Thank You!</h3>
+      <p>Application submitted successfully! We will contact you soon.</p>
+      <div class="next-steps">
+        <h3>What Happens Next?</h3>
+        <ul>
+          <li><div class="step-number">1</div><div><strong>Application Review</strong><br>Our team will review your application within 2–3 business days</div></li>
+          <li><div class="step-number">2</div><div><strong>Email Confirmation</strong><br>You'll receive an email with next steps and any additional questions</div></li>
+          <li><div class="step-number">3</div><div><strong>Intro Call</strong><br>A short virtual call to get to know you and discuss the role</div></li>
+          <li><div class="step-number">4</div><div><strong>Start Your Role</strong><br>Once accepted, you can begin your first week of work right away</div></li>
+        </ul>
+      </div>
+      <div class="share-section">
+        <p><strong>Know someone who might be interested?</strong></p>
+        <div class="share-buttons">
+          <button type="button" class="share-btn whatsapp-btn" onclick="shareViaWhatsApp()"><span class="share-icon">📱</span> Share via WhatsApp</button>
+          <button type="button" class="share-btn copy-link-btn" onclick="copyApplicationLink()"><span class="share-icon">🔗</span> Copy Application Link</button>
+        </div>
+        <div class="share-note"><small>Help your friends and family apply for this amazing opportunity!</small></div>
+        <div class="copy-feedback"></div>
+      </div>`;
+          wrap.appendChild(div);
+          div.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function initCountdown() {
+          const last = new Date(
+            new Date().getFullYear(),
+            new Date().getMonth() + 1,
+            0,
+          );
+          const target = new Date(
+            last.getFullYear(),
+            last.getMonth(),
+            last.getDate(),
+            23,
+            59,
+            59,
+          ).getTime();
+          const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+          document.getElementById("month-year").textContent =
+            months[last.getMonth()] + " " + last.getDate();
+          document.getElementById("positions").textContent =
+            Math.floor(Math.random() * 26) + 10;
+          function tick() {
+            const d = target - Date.now();
+            if (d < 0) return;
+            document.getElementById("days").textContent = Math.floor(
+              d / 86400000,
+            );
+            document.getElementById("hours").textContent = Math.floor(
+              (d % 86400000) / 3600000,
+            );
+            document.getElementById("minutes").textContent = Math.floor(
+              (d % 3600000) / 60000,
+            );
+            document.getElementById("seconds").textContent = Math.floor(
+              (d % 60000) / 1000,
+            );
+          }
+          tick();
+          setInterval(tick, 1000);
+        }
+      });
+
+      function shareViaWhatsApp() {
+        const text =
+          "Check out this amazing opportunity! I just applied and thought you might be interested too. Apply here: ";
+        window.open(
+          "https://wa.me/?text=" + encodeURIComponent(text + SHARE_URL),
+          "_blank",
+        );
+      }
+
+      function copyApplicationLink() {
+        const tmp = document.createElement("input");
+        tmp.value = SHARE_URL;
+        document.body.appendChild(tmp);
+        tmp.select();
+        tmp.setSelectionRange(0, 99999);
+        try {
+          document.execCommand("copy");
+          const fb = document.querySelector(".copy-feedback");
+          if (fb) {
+            fb.textContent = "✓ Link copied to clipboard!";
+            fb.classList.add("show");
+            setTimeout(() => fb.classList.remove("show"), 3000);
+          }
+        } catch (e) {
+          window.open(SHARE_URL, "_blank");
+        }
+        document.body.removeChild(tmp);
+      }
+    </script>
+  </body>
+</html>
